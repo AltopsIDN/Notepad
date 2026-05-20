@@ -8,12 +8,34 @@
     @livewireStyles
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-    .btn-edit { background:none; border:none; cursor:pointer; color:#525252; font-size:14px; transition:color 0.2s; }
+    .btn-edit { background:none; border:none; cursor:pointer; color:#525252; font-size:14px; transition:color 0.2s; position:relative; }
     .btn-edit:hover { color:#3b82f6; }
-    .btn-delete { background:none; border:none; cursor:pointer; color:#525252; font-size:14px; transition:color 0.2s; }
+    .btn-delete { background:none; border:none; cursor:pointer; color:#525252; font-size:14px; transition:color 0.2s; position:relative; }
     .btn-delete:hover { color:#f87171; }
-    .btn-star { background:none; border:none; cursor:pointer; font-size:15px; transition:color 0.2s; }
+    .btn-star { background:none; border:none; cursor:pointer; font-size:15px; transition:color 0.2s; position:relative; }
     .btn-star:hover { color:#facc15; }
+
+    /* TOOLTIP */
+    [data-tooltip] { position:relative; }
+    [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position:absolute;
+        bottom:calc(100% + 6px);
+        left:50%;
+        transform:translateX(-50%);
+        background:#2e2e2e;
+        color:#e5e5e5;
+        font-size:11px;
+        padding:4px 8px;
+        border-radius:6px;
+        white-space:nowrap;
+        opacity:0;
+        pointer-events:none;
+        transition:opacity 0.15s;
+    }
+    [data-tooltip]:hover::after {
+        opacity:1;
+    }
 </style>
 </head>
 <body style="background:#1a1a1a; margin:0;">

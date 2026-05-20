@@ -30,7 +30,7 @@
                 <div style="display:flex; flex-wrap:wrap; gap:6px; padding:0 4px;">
                     @foreach ($tags as $t)
                         <span style="font-size:12px; padding:3px 10px; border-radius:99px; cursor:pointer;
-                            background:{{ $t === 'Personal' ? '#2e1f5e' : ($t === 'Work' ? '#14291a' : ($t === 'Idea' ? '#2d1f0a' : ($t === 'Important' ? '#2d1515' : ($t === 'Study' ? '#0c1f3d' : '#2e2e2e')))) }};
+                            background:{{ $t === 'Personal' ? '#3d2b7a' : ($t === 'Work' ? '#1a3d24' : ($t === 'Idea' ? '#3d2a0d' : ($t === 'Important' ? '#3d1c1c' : ($t === 'Study' ? '#122b52' : '#2e2e2e')))) }};
                             color:{{ $t === 'Personal' ? '#a78bfa' : ($t === 'Work' ? '#34d399' : ($t === 'Idea' ? '#fbbf24' : ($t === 'Important' ? '#f87171' : ($t === 'Study' ? '#60a5fa' : '#a3a3a3')))) }};">
                             {{ $t }}
                         </span>
@@ -69,31 +69,31 @@
                 <div style="display:flex; flex-wrap:wrap; gap:6px;">
                     <button type="button" wire:click="$set('tag', 'Personal')"
                         style="padding:4px 12px; border-radius:99px; border:none; font-size:12px; font-weight:500; cursor:pointer;
-                            background:{{ $tag === 'Personal' ? '#a78bfa' : '#2e1f5e' }};
+                            background:{{ $tag === 'Personal' ? '#a78bfa' : '#3d2b7a' }};
                             color:{{ $tag === 'Personal' ? '#1a1a1a' : '#a78bfa' }};">
                         Personal
                     </button>
                     <button type="button" wire:click="$set('tag', 'Work')"
                         style="padding:4px 12px; border-radius:99px; border:none; font-size:12px; font-weight:500; cursor:pointer;
-                            background:{{ $tag === 'Work' ? '#34d399' : '#14291a' }};
+                            background:{{ $tag === 'Work' ? '#34d399' : '#1a3d24' }};
                             color:{{ $tag === 'Work' ? '#1a1a1a' : '#34d399' }};">
                         Work
                     </button>
                     <button type="button" wire:click="$set('tag', 'Idea')"
                         style="padding:4px 12px; border-radius:99px; border:none; font-size:12px; font-weight:500; cursor:pointer;
-                            background:{{ $tag === 'Idea' ? '#fbbf24' : '#2d1f0a' }};
+                            background:{{ $tag === 'Idea' ? '#fbbf24' : '#3d2a0d' }};
                             color:{{ $tag === 'Idea' ? '#1a1a1a' : '#fbbf24' }};">
                         Idea
                     </button>
                     <button type="button" wire:click="$set('tag', 'Important')"
                         style="padding:4px 12px; border-radius:99px; border:none; font-size:12px; font-weight:500; cursor:pointer;
-                            background:{{ $tag === 'Important' ? '#f87171' : '#2d1515' }};
+                            background:{{ $tag === 'Important' ? '#f87171' : '#3d1c1c' }};
                             color:{{ $tag === 'Important' ? '#1a1a1a' : '#f87171' }};">
                         Important
                     </button>
                     <button type="button" wire:click="$set('tag', 'Study')"
                         style="padding:4px 12px; border-radius:99px; border:none; font-size:12px; font-weight:500; cursor:pointer;
-                            background:{{ $tag === 'Study' ? '#60a5fa' : '#0c1f3d' }};
+                            background:{{ $tag === 'Study' ? '#60a5fa' : '#122b52' }};
                             color:{{ $tag === 'Study' ? '#1a1a1a' : '#60a5fa' }};">
                         Study
                     </button>
@@ -127,7 +127,9 @@
                         <p style="font-size:15px; font-weight:500; color:#f5f5f5;">{{ $note->title }}</p>
                         @if ($activeTab !== 'trash')
                             <button wire:click="toggleFavorite({{ $note->id }})"
-                                wire:key="star-{{ $note->id }}" class="btn-star"
+                                wire:key="star-{{ $note->id }}"
+                                class="btn-star"
+                                data-tooltip="{{ $note->is_favorite ? 'Remove from favorites' : 'Favorite' }}"
                                 style="color:{{ $note->is_favorite ? '#facc15' : '#525252' }};">
                                 @if ($note->is_favorite)
                                     <i class="fa-solid fa-star"></i>
@@ -145,7 +147,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
                         @if ($note->tag)
                             <span style="font-size:11px; padding:3px 10px; border-radius:99px;
-                                background:{{ $note->tag === 'Personal' ? '#2e1f5e' : ($note->tag === 'Work' ? '#14291a' : ($note->tag === 'Idea' ? '#2d1f0a' : ($note->tag === 'Important' ? '#2d1515' : ($note->tag === 'Study' ? '#0c1f3d' : '#2e2e2e')))) }};
+                                background:{{ $note->tag === 'Personal' ? '#3d2b7a' : ($note->tag === 'Work' ? '#1a3d24' : ($note->tag === 'Idea' ? '#3d2a0d' : ($note->tag === 'Important' ? '#3d1c1c' : ($note->tag === 'Study' ? '#122b52' : '#2e2e2e')))) }};
                                 color:{{ $note->tag === 'Personal' ? '#a78bfa' : ($note->tag === 'Work' ? '#34d399' : ($note->tag === 'Idea' ? '#fbbf24' : ($note->tag === 'Important' ? '#f87171' : ($note->tag === 'Study' ? '#60a5fa' : '#a3a3a3')))) }};">
                                 {{ $note->tag }}
                             </span>
@@ -163,10 +165,14 @@
                             </div>
                         @else
                             <div style="display:flex; gap:8px;">
-                                <button wire:click="openEdit({{ $note->id }})" class="btn-edit">
+                                <button wire:click="openEdit({{ $note->id }})"
+                                    class="btn-edit"
+                                    data-tooltip="Edit">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
-                                <button wire:click="delete({{ $note->id }})" class="btn-delete">
+                                <button wire:click="delete({{ $note->id }})"
+                                    class="btn-delete"
+                                    data-tooltip="Remove">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </div>
