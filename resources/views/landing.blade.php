@@ -678,7 +678,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-inner">
-            <div class="footer-copy">© {{ date('Y') }} {{ config('app.name', 'Notepad') }}. Dibuat dengan ❤️</div>
+            <div class="footer-copy">© {{ date('Y') }} {{ config('app.name', 'Notepad') }}. Dibuat oleh Davin</div>
             <div class="footer-links">
                 <a href="#">Privasi</a>
                 <a href="#">Syarat</a>
